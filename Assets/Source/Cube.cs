@@ -230,7 +230,7 @@ public class Cube : MonoBehaviour
             return;
         }
 
-        Debug.Log(context);
+        OnPlayerAction_Activate();
     }
 
     public void OnInputSystem_Player_Reset(InputAction.CallbackContext context)
@@ -240,7 +240,7 @@ public class Cube : MonoBehaviour
             return;
         }
 
-        Debug.Log(context);
+        OnPlayerAction_Reset();
     }
 
     protected void UpdateDebugAxis(Quaternion new_rotation)
