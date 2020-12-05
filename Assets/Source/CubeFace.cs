@@ -4,6 +4,9 @@ namespace PandoraCube
 {
     class CubeFace : MonoBehaviour
     {
-        // TODO This whole class - do it.
+        protected void Awake()
+        {
+            Debug.Log("CubeFace: Awake, id: " + GetInstanceID());
+        }
     }
 }

@@ -31,8 +31,13 @@ namespace PandoraCube
         // Main camera.
         public Camera cam = null;
 
+        protected void Awake()
+        {
+            Debug.Log("Cube: Awake, id: " + GetInstanceID());
+        }
+
         // Start is called before the first frame update
-        void Start()
+        protected void Start()
         {
             m = GetComponent<MeshFilter>().mesh;
             Debug.Log("Face count for cube: " + m.triangles.Length);
@@ -53,7 +58,7 @@ namespace PandoraCube
         }
 
         // Update is called once per frame
-        void Update()
+        protected void Update()
         {
 
 
@@ -74,7 +79,7 @@ namespace PandoraCube
             //}
         }
 
-        void UpdateRotation()
+        protected void UpdateRotation()
         {
             if (r_active != true)
             {
@@ -87,8 +92,6 @@ namespace PandoraCube
 
             if (r_time >= 1.0f)
             {
-                Debug.Log("Rotation animation ended.");
-
                 // Final lerp step.
                 transform.localRotation = r_end;
                 r_active = false;
@@ -118,9 +121,9 @@ namespace PandoraCube
          */
         protected Vector3 GetParallelAxis(Vector3 relative)
         {
-            Debug.Log("Cube.up angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.up, r_original * relative));
-            Debug.Log("Cube.right angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.right, r_original * relative));
-            Debug.Log("Cube.forward angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.forward, r_original * relative));
+            //Debug.Log("Cube.up angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.up, r_original * relative));
+            //Debug.Log("Cube.right angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.right, r_original * relative));
+            //Debug.Log("Cube.forward angle Cam.relative: " + Vector3.Angle(transform.rotation * Vector3.forward, r_original * relative));
 
             if (90.0f != Mathf.Round(Vector3.Angle(transform.rotation * Vector3.up, r_original * relative)))
             {
@@ -138,13 +141,12 @@ namespace PandoraCube
             return Vector3.zero;
         }
 
-        void StartRotation(Vector2 direction)
+        protected void StartRotation(Vector2 direction)
         {
             if (r_active)
             {
                 return;
             }
-            Debug.Log("Rotation animation started.");
 
             r_debug_timer = Time.time;
 
@@ -168,7 +170,7 @@ namespace PandoraCube
             // Could not find an axis to rotate around.
             if (axis == Vector3.zero)
             {
-                Debug.LogError("Failed to find parallel axis to rotate around.");
+                Debug.LogError("Cube: Failed to find parallel axis to rotate around.");
                 return;
             }
 
@@ -183,13 +185,12 @@ namespace PandoraCube
 
         public void OnPlayerAction_Activate()
         {
-            Debug.Log("OnButtonAction: action activated\n\tReset rotation");
-
+            Debug.Log("OnButtonAction: action activated");
         }
 
         public void OnPlayerAction_Reset()
         {
-            Debug.Log("OnUIButtonReset: reset all states");
+            Debug.Log("OnPlayerAction_Reset: reset all states");
 
             // TODO more to come.
 
@@ -203,7 +204,6 @@ namespace PandoraCube
 
         public void OnPlayerAction_Rotate(Vector2 direction)
         {
-            Debug.Log("UI Button Rotate: Rotate action fired, value: " + direction);
             StartRotation(direction);
         }
 
@@ -221,7 +221,7 @@ namespace PandoraCube
 
             Vector2 direction = context.ReadValue<Vector2>();
 
-            Debug.Log("InputSystem: Rotate action fired, value: " + direction);
+            //Debug.Log("InputSystem: Rotate action fired, value: " + direction);
 
             OnPlayerAction_Rotate(direction);
         }

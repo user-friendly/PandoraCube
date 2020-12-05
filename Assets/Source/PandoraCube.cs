@@ -12,7 +12,7 @@ namespace PandoraCube
         // Debug gizmo.
         public GameObject axisGizmo;
 
-        private void Awake()
+        protected void Awake()
         {
             Debug.Log("PandoraCube: Awake() called");
 
@@ -24,7 +24,7 @@ namespace PandoraCube
         }
 
         // Start is called before the first frame update
-        void Start()
+        protected void Start()
         {
             // TODO Left here for reference.
             //PlayerInput pi = GetComponent<PlayerInput>();
@@ -39,6 +39,15 @@ namespace PandoraCube
             SetupGUIButtonEventHandlers();
         }
 
+        // Event handler for when the player wants to quit the game/application.
+        public void OnPlayerAction_Exit()
+        {
+            Debug.Log("PandoraCube: Player requested to quit the app.");
+            // TODO See the manual's notes on Editor/Data/Documentation/en/ScriptReference/Application.Quit.html
+            //      Figure out of this is to be used on platforms other than mobile.
+            Application.Quit();
+        }
+
         // ISSUE: When scripts are reloaded/recomplied during Play mode the event system (or something else)
         //        gets bugged and doesn't fire mouse events. These handler setup can be done again when
         //        the assemblies are reloaded (see below). However, something else gets bugged and doesn't
@@ -49,7 +58,7 @@ namespace PandoraCube
 
             // TODO Remove/refactor when the UI elements are either removed or overhauled.
             // Setup UI controls callbacks.
-            Cube cube = GameObject.Find("the-cube").GetComponent<Cube>();
+            Cube cube = GameObject.Find("Cube").GetComponent<Cube>();
             GameObject.Find("Button Up")
                 .GetComponent<Button>().onClick.AddListener(() => { cube.OnPlayerAction_Rotate(Vector2.up); });
             GameObject.Find("Button Right")
