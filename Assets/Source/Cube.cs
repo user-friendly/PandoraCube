@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using System.Collections.Generic;
 using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PandoraCube
 {
@@ -10,6 +11,9 @@ namespace PandoraCube
 
         public PandoraCube game_app;
         protected GameObject debug_axis;
+
+        // Main camera.
+        public Camera cam = null;
 
         [InspectorName("Rotation speed")]
         public float r_speed = 3f;
@@ -28,8 +32,10 @@ namespace PandoraCube
         // Debug timer.
         private float r_debug_timer = 0.0f;
 
-        // Main camera.
-        public Camera cam = null;
+        // CubeFace prototype.
+        public GameObject cube_face = null;
+
+        protected List<GameObject> faces = new List<GameObject>();
 
         protected void Awake()
         {
@@ -47,7 +53,44 @@ namespace PandoraCube
             r_original = cam.transform.rotation;
             // Flip along the Z axis.
             r_original = r_original * Quaternion.AngleAxis(180.0f, Vector3.up);
-            transform.rotation = r_original;
+            // transform.rotation = r_original;
+
+            // Setup cube fases.
+            cube_face.SetActive(false);
+            
+            GameObject face_forward = Instantiate(cube_face, transform);
+            face_forward.name = "CubeFace_Forward";
+            face_forward.GetComponent<CubeFace>().SetFaceVariant(Vector3.forward);
+
+            GameObject face_back = Instantiate(cube_face, transform);
+            face_back.name = "CubeFace_Back";
+            face_back.GetComponent<CubeFace>().SetFaceVariant(Vector3.back);
+
+            GameObject face_up = Instantiate(cube_face, transform);
+            face_up.name = "CubeFace_Up";
+            face_up.GetComponent<CubeFace>().SetFaceVariant(Vector3.up);
+
+            GameObject face_right = Instantiate(cube_face, transform);
+            face_right.name = "CubeFace_Right";
+            face_right.GetComponent<CubeFace>().SetFaceVariant(Vector3.right);
+
+            GameObject face_down = Instantiate(cube_face, transform);
+            face_down.name = "CubeFace_Down";
+            face_down.GetComponent<CubeFace>().SetFaceVariant(Vector3.down);
+
+            GameObject face_left = Instantiate(cube_face, transform);
+            face_left.name = "CubeFace_Left";
+            face_left.GetComponent<CubeFace>().SetFaceVariant(Vector3.left);
+
+            faces.Add(face_forward);
+            faces.Add(face_back);
+            faces.Add(face_up);
+            faces.Add(face_right);
+            faces.Add(face_down);
+            faces.Add(face_left);
+
+            faces.ForEach(face => face.SetActive(true));
+            // Done setting up faces.
 
             GameObject helper_axis = game_app.CreateAxisGizmo();
             helper_axis.name = "Cube Helper Game Axis";
