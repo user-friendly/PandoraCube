@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 
-public class AxisGizmo : MonoBehaviour
+namespace PandoraCube
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AxisGizmo : MonoBehaviour
     {
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

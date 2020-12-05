@@ -60,6 +60,7 @@
     <Compile Include="Assets\Source\PandoraCube.cs" />
     <Compile Include="Assets\Source\DebugPanel.cs" />
     <Compile Include="Assets\Source\AxisGizmo.cs" />
+    <Compile Include="Assets\Source\CubeFace.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
