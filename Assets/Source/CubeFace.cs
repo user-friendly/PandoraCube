@@ -21,7 +21,7 @@ namespace PandoraCube
          * Variants are based on the vector direction's orientation.
          * There really should be only 6 variants - cube's sides.
          */
-        public void SetFaceVariant(Vector3 direction)
+        public void SetFaceDirection(Vector3 direction)
         {
             direction.Normalize();
 
@@ -36,7 +36,6 @@ namespace PandoraCube
                 transform.localRotation = Quaternion.LookRotation(Vector3.up, direction);
             }
 
-            
             transform.localPosition = (direction * offset);
         }
     }

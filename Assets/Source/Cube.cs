@@ -35,7 +35,7 @@ namespace PandoraCube
         // CubeFace prototype.
         public GameObject cube_face = null;
 
-        protected List<GameObject> faces = new List<GameObject>();
+        protected Dictionary<Vector3, GameObject> faces = new Dictionary<Vector3, GameObject>(6);
 
         protected void Awake()
         {
@@ -53,43 +53,22 @@ namespace PandoraCube
             r_original = cam.transform.rotation;
             // Flip along the Z axis.
             r_original = r_original * Quaternion.AngleAxis(180.0f, Vector3.up);
-            // transform.rotation = r_original;
+            transform.rotation = r_original;
 
             // Setup cube fases.
             cube_face.SetActive(false);
-            
-            GameObject face_forward = Instantiate(cube_face, transform);
-            face_forward.name = "CubeFace_Forward";
-            face_forward.GetComponent<CubeFace>().SetFaceVariant(Vector3.forward);
 
-            GameObject face_back = Instantiate(cube_face, transform);
-            face_back.name = "CubeFace_Back";
-            face_back.GetComponent<CubeFace>().SetFaceVariant(Vector3.back);
+            AddFace(Vector3.forward, "CubeFace_Forward");
+            AddFace(Vector3.back, "CubeFace_Back");
+            AddFace(Vector3.up, "CubeFace_Up");
+            AddFace(Vector3.right, "CubeFace_Right");
+            AddFace(Vector3.down, "CubeFace_Down");
+            AddFace(Vector3.left, "CubeFace_Left");
 
-            GameObject face_up = Instantiate(cube_face, transform);
-            face_up.name = "CubeFace_Up";
-            face_up.GetComponent<CubeFace>().SetFaceVariant(Vector3.up);
-
-            GameObject face_right = Instantiate(cube_face, transform);
-            face_right.name = "CubeFace_Right";
-            face_right.GetComponent<CubeFace>().SetFaceVariant(Vector3.right);
-
-            GameObject face_down = Instantiate(cube_face, transform);
-            face_down.name = "CubeFace_Down";
-            face_down.GetComponent<CubeFace>().SetFaceVariant(Vector3.down);
-
-            GameObject face_left = Instantiate(cube_face, transform);
-            face_left.name = "CubeFace_Left";
-            face_left.GetComponent<CubeFace>().SetFaceVariant(Vector3.left);
-
-            faces.Add(face_forward);
-            faces.Add(face_back);
-            faces.Add(face_up);
-            faces.Add(face_right);
-            faces.Add(face_down);
-            faces.Add(face_left);
-
-            faces.ForEach(face => face.SetActive(true));
+            foreach (KeyValuePair<Vector3, GameObject> kvp in faces)
+            {
+                kvp.Value.SetActive(true);
+            }
             // Done setting up faces.
 
             GameObject helper_axis = game_app.CreateAxisGizmo();
@@ -100,11 +79,25 @@ namespace PandoraCube
             debug_axis = helper_axis;
         }
 
+        protected GameObject AddFace(Vector3 direction, string name = "")
+        {
+            GameObject face = Instantiate(cube_face, transform);
+
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                face.name = name;
+            }
+
+            face.GetComponent<CubeFace>().SetFaceDirection(direction);
+
+            faces.Add(direction, face);
+
+            return face;
+        }
+
         // Update is called once per frame
         protected void Update()
         {
-
-
             UpdateRotation();
             // TODO Create a proper test case out of this snippet.
             //else
