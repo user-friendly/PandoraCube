@@ -37,6 +37,8 @@ namespace PandoraCube
 
         protected Dictionary<Vector3, GameObject> faces = new Dictionary<Vector3, GameObject>(6);
 
+        public CubeFaceSet face_set;
+
         protected void Awake()
         {
             Debug.Log("Cube: Awake, id: " + GetInstanceID());
@@ -46,7 +48,7 @@ namespace PandoraCube
         protected void Start()
         {
             m = GetComponent<MeshFilter>().mesh;
-            Debug.Log("Face count for cube: " + m.triangles.Length);
+            Debug.Log("Cube: Face count for cube: " + m.triangles.Length);
 
             // Align cube with main camera rotation and save it, in case
             // the camera changes rotation (e.g. due to animation).
@@ -58,18 +60,7 @@ namespace PandoraCube
             // Setup cube fases.
             cube_face.SetActive(false);
 
-            AddFace(Vector3.forward, "CubeFace_Forward");
-            AddFace(Vector3.back, "CubeFace_Back");
-            AddFace(Vector3.up, "CubeFace_Up");
-            AddFace(Vector3.right, "CubeFace_Right");
-            AddFace(Vector3.down, "CubeFace_Down");
-            AddFace(Vector3.left, "CubeFace_Left");
-
-            foreach (KeyValuePair<Vector3, GameObject> kvp in faces)
-            {
-                kvp.Value.SetActive(true);
-            }
-            // Done setting up faces.
+            face_set.AttachTo(this.gameObject);
 
             GameObject helper_axis = game_app.CreateAxisGizmo();
             helper_axis.name = "Cube Helper Game Axis";
@@ -77,22 +68,6 @@ namespace PandoraCube
             helper_axis.transform.Translate(new Vector3(-0.203f, 0.644f, 1.349f), Space.World);
             helper_axis.transform.localRotation = r_original;
             debug_axis = helper_axis;
-        }
-
-        protected GameObject AddFace(Vector3 direction, string name = "")
-        {
-            GameObject face = Instantiate(cube_face, transform);
-
-            if (!String.IsNullOrWhiteSpace(name))
-            {
-                face.name = name;
-            }
-
-            face.GetComponent<CubeFace>().SetFaceDirection(direction);
-
-            faces.Add(direction, face);
-
-            return face;
         }
 
         // Update is called once per frame

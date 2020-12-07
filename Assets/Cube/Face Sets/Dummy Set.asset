@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71de363d7de57d48bc2072ef499113b, type: 3}
+  m_Name: Dummy Set
+  m_EditorClassIdentifier: 
+  face_prototypes:
+  - {fileID: 919132149155446097, guid: 5e86653908b9b6e40947caace74f716e, type: 3}
+  - {fileID: 919132149155446097, guid: 35e3b576c0e201c4cbdc3b3f9abcfe5a, type: 3}
+  - {fileID: 919132149155446097, guid: 323b7a4771fc4b24891853b12afa03eb, type: 3}
+  - {fileID: 919132149155446097, guid: 1a4e15230ac287d4fb894600f4e138e5, type: 3}
+  - {fileID: 919132149155446097, guid: 238839e0e8349bd44b41b1455473ef9a, type: 3}
+  - {fileID: 919132149155446097, guid: 0ce2e95e4f9759c44b741eb4ad47f98f, type: 3}

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace PandoraCube
 {
+    // TODO Candidate for a ScriptableObject, instead of MonoBehaviour.
     public class PandoraCube : MonoBehaviour
     {
         // Target FPS
