@@ -32,16 +32,18 @@ namespace PandoraCube
         // Debug timer.
         private float r_debug_timer = 0.0f;
 
-        // CubeFace prototype.
-        public GameObject cube_face = null;
-
         protected Dictionary<Vector3, GameObject> faces = new Dictionary<Vector3, GameObject>(6);
 
-        public CubeFaceSet face_set;
+        public CubeFaceSet face_set_asset;
+        protected CubeFaceSet face_set;
 
         protected void Awake()
         {
             Debug.Log("Cube: Awake, id: " + GetInstanceID());
+
+            // TODO This does not look right.
+            face_set = Instantiate(face_set_asset);
+            face_set.Init(transform);
         }
 
         // Start is called before the first frame update
@@ -56,11 +58,6 @@ namespace PandoraCube
             // Flip along the Z axis.
             r_original = r_original * Quaternion.AngleAxis(180.0f, Vector3.up);
             transform.rotation = r_original;
-
-            // Setup cube fases.
-            cube_face.SetActive(false);
-
-            face_set.AttachTo(this.gameObject);
 
             GameObject helper_axis = game_app.CreateAxisGizmo();
             helper_axis.name = "Cube Helper Game Axis";

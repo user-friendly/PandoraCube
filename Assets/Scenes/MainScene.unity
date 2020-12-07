@@ -2606,7 +2606,7 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   r_speed: 0.25
   cube_face: {fileID: 2131685113}
-  face_set: {fileID: 11400000, guid: 29d2a23bd841e654181b3c042ba2b87d, type: 2}
+  face_set_asset: {fileID: 11400000, guid: 29d2a23bd841e654181b3c042ba2b87d, type: 2}
 --- !u!4 &1655378469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7c2c5f52b90ffd84c98261c262c48e56,
