@@ -29,6 +29,12 @@ namespace PandoraCube
             }
         }
 
+        public void DummyActivateFace()
+        {
+            //Material m = GetComponent<Renderer>().material;
+            //Debug.Log("Cube: First material used: " + m.name);
+        }
+
         /**
          * Set face's variant.
          * 

@@ -7,8 +7,6 @@ namespace PandoraCube
 {
     public class Cube : MonoBehaviour
     {
-        private Mesh m;
-
         public PandoraCube game_app;
         protected GameObject debug_axis;
 
@@ -41,6 +39,8 @@ namespace PandoraCube
         {
             Debug.Log("Cube: Awake, id: " + GetInstanceID());
 
+            Debug.Log("Cube: Face count for cube: " + GetComponent<MeshFilter>().mesh.triangles.Length);
+
             // TODO This does not look right.
             face_set = Instantiate(face_set_asset);
             face_set.Init(transform);
@@ -49,13 +49,10 @@ namespace PandoraCube
         // Start is called before the first frame update
         protected void Start()
         {
-            m = GetComponent<MeshFilter>().mesh;
-            Debug.Log("Cube: Face count for cube: " + m.triangles.Length);
-
             // Align cube with main camera rotation and save it, in case
             // the camera changes rotation (e.g. due to animation).
             r_original = cam.transform.rotation;
-            // Flip along the Z axis.
+            // Flip the Z axis.
             r_original = r_original * Quaternion.AngleAxis(180.0f, Vector3.up);
             transform.rotation = r_original;
 
@@ -194,6 +191,16 @@ namespace PandoraCube
         public void OnPlayerAction_Activate()
         {
             Debug.Log("OnButtonAction: action activated");
+
+            GameObject face = face_set.GetForwardFacing(r_original * Vector3.forward);
+            if (face)
+            {
+                Debug.Log("Cube: active face is: " + face.name);
+            }
+            else
+            {
+                Debug.Log("Cube: NO active face");
+            }
         }
 
         public void OnPlayerAction_Reset()

@@ -8,6 +8,7 @@ namespace PandoraCube
 {
     using CubeFacePair = Tuple<Vector3, string>;
     using CubeFaceMap = Dictionary<Vector3, GameObject>;
+    using CubeFaceMapPair = KeyValuePair<Vector3, GameObject>;
 
     [CreateAssetMenu(fileName = "Cube Face Set", menuName = "Pandora Cube/Cube Face Set")]
     public class CubeFaceSet : ScriptableObject
@@ -19,7 +20,8 @@ namespace PandoraCube
 
         public GameObject[] face_prototypes = new GameObject[FACE_COUNT];
 
-        protected CubeFaceMap face = new CubeFaceMap();
+        protected CubeFaceMap face_map = new CubeFaceMap();
+        public CubeFaceMap faces => face_map;
 
         protected CubeFacePair[] face_layout = new CubeFacePair[] {
             new CubeFacePair(Vector3.forward, "CubeFace_Forward"),
@@ -50,8 +52,27 @@ namespace PandoraCube
                 CubeFace new_cubeface = (CubeFace)new_face.AddComponent(typeof(CubeFace));
                 new_cubeface.direction = face_layout[i].Item1;
 
-                face[face_layout[i].Item1] = new_face;
+                face_map[face_layout[i].Item1] = new_face;
             }
+        }
+
+        /**
+         * Get the face facing the relative axis.
+         * 
+         * Note that each face's forward axis is up.
+         */
+        public GameObject GetForwardFacing(Vector3 relative)
+        {
+            GameObject face = null;
+            foreach (CubeFaceMapPair pair in face_map)
+            {
+                face = pair.Value;
+                if (0.0f == Mathf.Round(Vector3.Angle(face.transform.rotation * Vector3.up, relative)))
+                {
+                    return face;
+                }
+            }
+            return null;
         }
     }
 }
