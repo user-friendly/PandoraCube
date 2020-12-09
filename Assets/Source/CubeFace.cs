@@ -11,12 +11,15 @@ namespace PandoraCube
         // Offset faces, relative to cube's center.
         protected const float offset = 1.05f;
 
-        // Initial rotation.
-        //protected Quaternion q_original;
+        protected Material m_original;
+        protected Material m_active;
 
         protected void Awake()
         {
             Debug.Log("CubeFace: Awake, id: " + GetInstanceID() + ", gameObject: " + gameObject.name);
+
+            m_original = GetComponent<Renderer>().material;
+            m_active = (Material)Resources.Load("Materials/Solid Yellow");
         }
 
         protected void Start()
@@ -31,8 +34,8 @@ namespace PandoraCube
 
         public void DummyActivateFace()
         {
-            //Material m = GetComponent<Renderer>().material;
-            //Debug.Log("Cube: First material used: " + m.name);
+            GetComponent<Renderer>().material = m_active;
+            
         }
 
         /**

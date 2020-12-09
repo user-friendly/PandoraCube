@@ -196,6 +196,7 @@ namespace PandoraCube
             if (face)
             {
                 Debug.Log("Cube: active face is: " + face.name);
+                face.GetComponent<CubeFace>().DummyActivateFace();
             }
             else
             {
