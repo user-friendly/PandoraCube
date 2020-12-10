@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace PandoraCube.TimeManagment
 {
-    class FrameTimer : ITimer
+    public class FrameTimer : Timer
     {
-        public float Get()
-        {
-            throw new System.NotImplementedException();
-        }
+        public FrameTimer(float seconds)
+            : base(seconds) { }
 
-        public float GetEndTime()
-        {
-            throw new System.NotImplementedException();
-        }
+        //~FrameTimer()
+        //{
+        //    Debug.Log("FrameTimer: finilized: " + this.GetHashCode());
+        //}
 
-        public void Set(float seconds)
+        public override bool Tick()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Subscribe(UnityAction call)
-        {
-            throw new System.NotImplementedException();
+            if (elapsed < end)
+            {
+                elapsed += Time.deltaTime;
+                return true;
+            }
+            else
+            {
+                OnTimeElapsedEventHandler();
+            }
+            return false;
         }
     }
 }

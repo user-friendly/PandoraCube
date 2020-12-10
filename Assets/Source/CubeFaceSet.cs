@@ -21,7 +21,6 @@ namespace PandoraCube
         public GameObject[] face_prototypes = new GameObject[FACE_COUNT];
 
         protected CubeFaceMap face_map = new CubeFaceMap();
-        public CubeFaceMap faces => face_map;
 
         protected CubeFacePair[] face_layout = new CubeFacePair[] {
             new CubeFacePair(Vector3.forward, "CubeFace_Forward"),

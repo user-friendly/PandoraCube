@@ -2,7 +2,7 @@
 
 namespace PandoraCube.TimeManagment
 {
-    class FixedTimer
+    public class FixedTimer
     {
         // TODO Implement, some day in the future.
     }

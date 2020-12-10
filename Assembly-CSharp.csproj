@@ -64,7 +64,7 @@
     <Compile Include="Assets\Source\AxisGizmo.cs" />
     <Compile Include="Assets\Source\TimeManagment\TimeManager.cs" />
     <Compile Include="Assets\Source\CubeFace.cs" />
-    <Compile Include="Assets\Source\TimeManagment\ITimer.cs" />
+    <Compile Include="Assets\Source\TimeManagment\Timer.cs" />
     <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
   </ItemGroup>
   <ItemGroup>

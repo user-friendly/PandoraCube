@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using PandoraCube.TimeManagment;
 
 namespace PandoraCube
 {
@@ -13,6 +14,8 @@ namespace PandoraCube
 
         protected Material m_original;
         protected Material m_active;
+
+        protected bool is_active;
 
         protected void Awake()
         {
@@ -34,8 +37,23 @@ namespace PandoraCube
 
         public void DummyActivateFace()
         {
+            if (is_active)
+            {
+                return;
+            }
             GetComponent<Renderer>().material = m_active;
-            
+            TimeManager tm = GameObject.Find("PandoraCube").GetComponent<TimeManager>();
+            if (tm != null)
+            {
+                is_active = true;
+                tm.CreateFrameTimer(1.0f, (Timer t) =>
+                {
+                    //Debug.Log("CubeFace: Timer's up: " + t.GetHashCode()
+                    //    + "\n\telapsed time (seconds): " + t.Get());
+                    GetComponent<Renderer>().material = m_original;
+                    is_active = false;
+                });
+            }
         }
 
         /**
