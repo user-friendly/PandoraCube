@@ -3,7 +3,7 @@ using PandoraCube.TimeManagment;
 
 namespace PandoraCube
 {
-    class CubeFace : MonoBehaviour
+    public class CubeFace : MonoBehaviour
     {
         [HideInInspector]
         public Vector3 direction;

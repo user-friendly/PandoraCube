@@ -66,6 +66,7 @@
     <Compile Include="Assets\Source\CubeFace.cs" />
     <Compile Include="Assets\Source\TimeManagment\Timer.cs" />
     <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
+    <Compile Include="Assets\Source\CubeFaceSequence.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

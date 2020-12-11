@@ -35,6 +35,9 @@ namespace PandoraCube
         public CubeFaceSet face_set_asset;
         protected CubeFaceSet face_set;
 
+        public uint sequence_length = 6;
+        protected CubeFaceSequence sequence;
+
         protected void Awake()
         {
             Debug.Log("Cube: Awake, id: " + GetInstanceID());
@@ -44,6 +47,8 @@ namespace PandoraCube
             // TODO This does not look right.
             face_set = Instantiate(face_set_asset);
             face_set.Init(transform);
+
+            GenerateNewSequence();
         }
 
         // Start is called before the first frame update
@@ -186,6 +191,18 @@ namespace PandoraCube
             r_end = transform.localRotation * Quaternion.AngleAxis(angle_direction * r_angle, axis);
         }
 
+        protected void GenerateNewSequence()
+        {
+            sequence = CubeFaceSequence.CreateFaceSequence(face_set, sequence_length);
+
+            string debug_sequence = "";
+            foreach (GameObject face in sequence.GetSequence())
+            {
+                debug_sequence += face.name + ", ";
+            }
+            Debug.Log("Cube: New sequence generated: " + debug_sequence);
+        }
+
         // Player action event handlers.
 
         public void OnPlayerAction_Activate()
@@ -195,8 +212,17 @@ namespace PandoraCube
             GameObject face = face_set.GetForwardFacing(r_original * Vector3.forward);
             if (face)
             {
-                Debug.Log("Cube: active face is: " + face.name);
-                face.GetComponent<CubeFace>().DummyActivateFace();
+                if (sequence.Activate(face))
+                {
+                    Debug.Log("Cube: Successfully activated: " + face.name);
+                    face.GetComponent<CubeFace>().DummyActivateFace();
+                }
+
+                if (sequence.IsComplete())
+                {
+                    Debug.Log("Cube: Sequence successfully completed.");
+                    GenerateNewSequence();
+                }
             }
             else
             {

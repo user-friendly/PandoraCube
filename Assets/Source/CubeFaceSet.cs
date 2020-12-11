@@ -20,6 +20,7 @@ namespace PandoraCube
 
         public GameObject[] face_prototypes = new GameObject[FACE_COUNT];
 
+        // TODO Do I really need a dictionary?
         protected CubeFaceMap face_map = new CubeFaceMap();
 
         protected CubeFacePair[] face_layout = new CubeFacePair[] {
@@ -72,6 +73,11 @@ namespace PandoraCube
                 }
             }
             return null;
+        }
+
+        public List<GameObject> GetFaces()
+        {
+            return new List<GameObject>(face_map.Values);
         }
     }
 }
