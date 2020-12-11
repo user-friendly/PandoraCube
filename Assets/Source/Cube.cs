@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 namespace PandoraCube
 {
@@ -38,11 +38,20 @@ namespace PandoraCube
         public uint sequence_length = 6;
         protected CubeFaceSequence sequence;
 
+        public UnityEvent<GameObject> OnActivated;
+        public UnityEvent<GameObject> OnActivatedFailure;
+        public UnityEvent<GameObject> OnActivatedSuccess;
+        public UnityEvent<List<GameObject>> OnSequenceChanged;
+
+        static public Cube instance
+        {
+            get { return GameObject.Find("Cube").GetComponent<Cube>(); }
+        }
+
         protected void Awake()
         {
-            Debug.Log("Cube: Awake, id: " + GetInstanceID());
-
-            Debug.Log("Cube: Face count for cube: " + GetComponent<MeshFilter>().mesh.triangles.Length);
+            // Debug.Log("Cube: Awake, id: " + GetInstanceID());
+            // Debug.Log("Cube: Face count for cube: " + GetComponent<MeshFilter>().mesh.triangles.Length);
 
             // TODO This does not look right.
             face_set = Instantiate(face_set_asset);
@@ -61,6 +70,24 @@ namespace PandoraCube
             r_original = r_original * Quaternion.AngleAxis(180.0f, Vector3.up);
             transform.rotation = r_original;
 
+            if (OnActivated == null)
+            {
+                OnActivated = new UnityEvent<GameObject>();
+            }
+            if (OnActivatedFailure == null)
+            {
+                OnActivatedFailure = new UnityEvent<GameObject>();
+            }
+            if (OnActivatedSuccess == null)
+            {
+                OnActivatedSuccess = new UnityEvent<GameObject>();
+            }
+            if (OnSequenceChanged == null)
+            {
+                OnSequenceChanged = new UnityEvent<List<GameObject>>();
+            }
+
+            // TODO Make conditional on debug buid.
             GameObject helper_axis = game_app.CreateAxisGizmo();
             helper_axis.name = "Cube Helper Game Axis";
             helper_axis.transform.localScale = Vector3.one * 0.05f;
@@ -108,7 +135,7 @@ namespace PandoraCube
                 r_time = 0.0f;
 
                 r_debug_timer = Time.time - r_debug_timer;
-                Debug.Log("Rotation animation time: " + TimeSpan.FromSeconds(r_debug_timer).ToString(@"mm\:ss\.ffff"));
+                // Debug.Log("Rotation animation time: " + TimeSpan.FromSeconds(r_debug_timer).ToString(@"mm\:ss\.ffff"));
             }
 
             // TODO Only in debug mode?
@@ -195,12 +222,15 @@ namespace PandoraCube
         {
             sequence = CubeFaceSequence.CreateFaceSequence(face_set, sequence_length);
 
+            OnSequenceChanged.Invoke(sequence.Get());
+
             string debug_sequence = "";
-            foreach (GameObject face in sequence.GetSequence())
+            foreach (GameObject face in sequence.Get())
             {
                 debug_sequence += face.name + ", ";
             }
             Debug.Log("Cube: New sequence generated: " + debug_sequence);
+
         }
 
         // Player action event handlers.
@@ -216,6 +246,8 @@ namespace PandoraCube
                 {
                     Debug.Log("Cube: Successfully activated: " + face.name);
                     face.GetComponent<CubeFace>().DummyActivateFace();
+
+                    OnSequenceChanged.Invoke(sequence.Get());
                 }
 
                 if (sequence.IsComplete())

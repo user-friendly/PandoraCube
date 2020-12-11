@@ -15,9 +15,6 @@ namespace PandoraCube
     {
         public const uint FACE_COUNT = 6;
 
-        [HideInInspector]
-        public Transform parent;
-
         public GameObject[] face_prototypes = new GameObject[FACE_COUNT];
 
         // TODO Do I really need a dictionary?
@@ -32,15 +29,13 @@ namespace PandoraCube
             new CubeFacePair(Vector3.left, "CubeFace_Left")
         };
 
-        protected void Awake()
-        {
-            Debug.Log("CubeFaceSet: Awake()");
-        }
+        //protected void Awake()
+        //{
+        //    Debug.Log("CubeFaceSet: Awake()");
+        //}
 
         public void Init(Transform parent)
         {
-            this.parent = parent;
-
             Assert.IsNotNull(parent, "CubeFaceSet: There must be a parent transform");
             Assert.AreEqual(FACE_COUNT, face_prototypes.Length, "CubeFaceSet: There must be 6 face prototypes");
 

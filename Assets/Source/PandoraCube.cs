@@ -13,9 +13,14 @@ namespace PandoraCube
         // Debug gizmo.
         public GameObject axisGizmo;
 
+        static public PandoraCube instance
+        {
+            get { return GameObject.Find("PandoraCube").GetComponent<PandoraCube>(); }
+        }
+
         protected void Awake()
         {
-            Debug.Log("PandoraCube: Awake() called");
+            // Debug.Log("PandoraCube: Awake() called");
 
             // Disable the gizmo so we don't get an artifact at origin.
             if (axisGizmo)
@@ -32,7 +37,7 @@ namespace PandoraCube
             //pi.actions["UI/Click"].performed += OnClick;
             // InputSystemUIInputModule uii = GameObject.Find("EventSystem").GetComponent<InputSystemUIInputModule>();
 
-            Debug.Log("PandoraCube: Start() called");
+            // Debug.Log("PandoraCube: Start() called");
 
             Debug.Log("PandoraCube: Set target FPS to " + tfps);
             Application.targetFrameRate = tfps;

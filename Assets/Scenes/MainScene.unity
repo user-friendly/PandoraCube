@@ -229,13 +229,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1471893370}
+  - {fileID: 1575236115}
   m_Father: {fileID: 757969855}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 580.2}
-  m_SizeDelta: {x: 0, y: -1160.2397}
+  m_AnchoredPosition: {x: 0.000030517578, y: 558.04}
+  m_SizeDelta: {x: 0, y: -1115.9218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166322800
 MonoBehaviour:
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsCounter: {fileID: 1471893371}
+  faceSequence: {fileID: 1575236116}
 --- !u!1001 &292015176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2205,7 +2207,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 87.4, y: -23}
-  m_SizeDelta: {x: 174.84668, y: 46.18367}
+  m_SizeDelta: {x: 174.84668, y: 46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1471893371
 MonoBehaviour:
@@ -2523,6 +2525,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaf207764c5e3e47b1fdfc8485409b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1575236114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575236115}
+  - component: {fileID: 1575236117}
+  - component: {fileID: 1575236116}
+  m_Layer: 5
+  m_Name: Face Sequence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1575236115
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575236114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 166322799}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384.00336, y: -83.2}
+  m_SizeDelta: {x: 767.9933, y: 74}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1575236116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575236114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 32
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Sequence: '
+--- !u!222 &1575236117
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575236114}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1655378464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2619,6 +2700,31 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   r_speed: 0.25
   face_set_asset: {fileID: 11400000, guid: 29d2a23bd841e654181b3c042ba2b87d, type: 2}
+  sequence_length: 6
+  OnActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  OnActivatedFailure:
+    m_PersistentCalls:
+      m_Calls: []
+  OnActivatedSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSequenceChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 166322802}
+        m_TargetAssemblyTypeName: PandoraCube.DebugPanel, Assembly-CSharp
+        m_MethodName: OnCubeSequenceChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1787699661
 PrefabInstance:
   m_ObjectHideFlags: 0

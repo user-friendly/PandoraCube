@@ -35,9 +35,17 @@ namespace PandoraCube
         }
 
         /**
-         * Get a copy of the initial sequence.
+         * Get the current sequence.
          */
-        public List<GameObject> GetSequence()
+        public List<GameObject> Get()
+        {
+            return new List<GameObject>(state);
+        }
+
+        /**
+         * Get the initial sequence.
+         */
+        public List<GameObject> GetInitial()
         {
             return new List<GameObject>(sequence);
         }

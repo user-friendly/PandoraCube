@@ -5,6 +5,8 @@ namespace PandoraCube
 {
     public class CubeFace : MonoBehaviour
     {
+        public string human_name;
+
         [HideInInspector]
         public Vector3 direction;
 
@@ -19,7 +21,7 @@ namespace PandoraCube
 
         protected void Awake()
         {
-            Debug.Log("CubeFace: Awake, id: " + GetInstanceID() + ", gameObject: " + gameObject.name);
+            // Debug.Log("CubeFace: Awake, id: " + GetInstanceID() + ", gameObject: " + gameObject.name);
 
             m_original = GetComponent<Renderer>().material;
             m_active = (Material)Resources.Load("Materials/Solid Yellow");
