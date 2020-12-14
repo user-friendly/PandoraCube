@@ -64,9 +64,10 @@
     <Compile Include="Assets\Source\AxisGizmo.cs" />
     <Compile Include="Assets\Source\TimeManagment\TimeManager.cs" />
     <Compile Include="Assets\Source\CubeFace.cs" />
+    <Compile Include="Assets\Source\CubeFaceSequence.cs" />
     <Compile Include="Assets\Source\TimeManagment\Timer.cs" />
     <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
-    <Compile Include="Assets\Source\CubeFaceSequence.cs" />
+    <Compile Include="Assets\Source\UI\Sequence.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -632,6 +633,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
