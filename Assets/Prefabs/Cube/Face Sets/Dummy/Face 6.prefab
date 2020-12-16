@@ -94,5 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928b45584bf225545b4381a745baad25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 5
   human_name: Six
   direction: {x: 0, y: 0, z: 0}

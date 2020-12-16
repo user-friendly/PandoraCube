@@ -5,6 +5,7 @@ namespace PandoraCube
 {
     public class CubeFace : MonoBehaviour
     {
+        public int index;
         public string human_name;
 
         [HideInInspector]

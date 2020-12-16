@@ -2092,6 +2092,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1242520136}
     m_Modifications:
+    - target: {fileID: 5701682751238705352, guid: d65d80945d21b7141b93d53b9502ccb8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 746102517841364992, guid: d68efac281764604dbfa09abec225a19,
+        type: 3}
     - target: {fileID: 6796960802019130569, guid: d65d80945d21b7141b93d53b9502ccb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2441,6 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e05efeaec383bb44b15bd4d19f7f41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  default_color: {r: 1, g: 1, b: 1, a: 1}
   active_color: {r: 1, g: 0.9137255, b: 0, a: 1}
   icons:
   - {fileID: 924605068}
@@ -3226,6 +3233,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 166322802}
         m_TargetAssemblyTypeName: PandoraCube.DebugPanel, Assembly-CSharp
+        m_MethodName: OnCubeSequenceChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1242520140}
+        m_TargetAssemblyTypeName: PandoraCube.UI.Sequence, Assembly-CSharp
         m_MethodName: OnCubeSequenceChanged
         m_Mode: 0
         m_Arguments:
