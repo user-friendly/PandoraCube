@@ -9,6 +9,11 @@ namespace PandoraCube
     using CubeFaceMap = Dictionary<Vector3, GameObject>;
     using CubeFaceMapPair = KeyValuePair<Vector3, GameObject>;
 
+    // TODO Consider making this a central class for face sets.
+    //      The UI sequence class has the connection between
+    //      face icons and faces. The face has the index that
+    //      matches the icon index in Sequence.
+
     [CreateAssetMenu(fileName = "Cube Face Set", menuName = "Pandora Cube/Cube Face Set")]
     public class CubeFaceSet : ScriptableObject
     {
@@ -27,11 +32,6 @@ namespace PandoraCube
             new CubeFacePair(Vector3.down, "CubeFace_Down"),
             new CubeFacePair(Vector3.left, "CubeFace_Left")
         };
-
-        //protected void Awake()
-        //{
-        //    Debug.Log("CubeFaceSet: Awake()");
-        //}
 
         public void Init(Transform parent)
         {

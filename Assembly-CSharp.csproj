@@ -68,6 +68,9 @@
     <Compile Include="Assets\Source\UI\Sequence.cs" />
     <Compile Include="Assets\Source\TimeManagment\Timer.cs" />
     <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
+    <Compile Include="Assets\Source\UI\FullScreenMessage.cs" />
+    <Compile Include="Assets\Source\UI\CountdownTimer.cs" />
+    <Compile Include="Assets\Source\TimeManagment\CountdownTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

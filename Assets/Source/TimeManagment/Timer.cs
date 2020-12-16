@@ -19,7 +19,7 @@ namespace PandoraCube.TimeManagment
          * The elapsed time will not significantly increase past the
          * end time.
          */
-        public float Get()
+        public virtual float Get()
         {
             return elapsed;
         }
@@ -27,7 +27,7 @@ namespace PandoraCube.TimeManagment
         /**
          * Get the seconds the timer was set for.
          */
-        public float GetEndTime()
+        public virtual float GetEndTime()
         {
             return end;
         }
@@ -35,7 +35,7 @@ namespace PandoraCube.TimeManagment
         /**
          * Check whether the timer is done.
          */
-        public bool IsDone()
+        public virtual bool IsDone()
         {
             return (elapsed >= end) ? true : false;
         }

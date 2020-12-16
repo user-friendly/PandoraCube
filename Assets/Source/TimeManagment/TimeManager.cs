@@ -8,7 +8,10 @@ namespace PandoraCube.TimeManagment {
         // Frame timers;
         protected List<FrameTimer> frame_timers = new List<FrameTimer>();
 
-        protected List<FrameTimer> finished_timers = new List<FrameTimer>();
+        // Fixed Countdown Timer
+        protected List<CountdownTimer> cd_timer = new List<CountdownTimer>();
+
+        protected List<Timer> finished_timers = new List<Timer>();
 
         protected void Update()
         {
@@ -30,6 +33,11 @@ namespace PandoraCube.TimeManagment {
                 }
                 finished_timers.Clear();
             }
+        }
+
+        protected void FixedUpdate()
+        {
+            
         }
 
         /**

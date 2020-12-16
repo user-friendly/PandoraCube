@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 namespace PandoraCube
 {
+    // TODO This class is becoming quite heavy. Consider refactoring.
+
+
     public class Cube : MonoBehaviour
     {
         public PandoraCube game_app;

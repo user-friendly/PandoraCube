@@ -12,11 +12,6 @@ namespace PandoraCube
 
         public Text faceSequence;
 
-        protected void Awake()
-        {
-            
-        }
-
         // Update is called once per frame
         protected void Update()
         {

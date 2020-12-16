@@ -13,22 +13,21 @@ namespace PandoraCube.UI
         public GameObject[] icons = new GameObject[3];
         public Sprite[] icon_set = new Sprite[6];
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            //Image icon1 = icons[0].transform.Find("Thumbnail").GetComponent<Image>();
-            //icon1.color = active_color;
-            //icon1.sprite = icon_set[5];
-        }
+        //// Start is called before the first frame update
+        //void Start()
+        //{
 
-        // Update is called once per frame
-        void Update()
-        {
+        //}
 
-        }
+        //// Update is called once per frame
+        //void Update()
+        //{
+
+        //}
 
         public void OnCubeSequenceChanged(List<GameObject> sequence)
         {
+            // FIXME It's a dumb range checking way.
             Image icon;
             for (int i = 0; i < 3; i++)
             {
