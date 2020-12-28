@@ -1,12 +1,19 @@
-﻿using UnityEngine.Events;
-
-namespace PandoraCube.TimeManagment
+﻿namespace PandoraCube.TimeManagment
 {
+    /**
+     * I would like to hide the Tick() method and make it only available
+     * in the TimeManager class. Perhaps there is some OOP design patter
+     * involving multiple interfaces, but this will have to wait.
+     */
+
+    public delegate void TimeElapsed<T>(T timer);
+
     abstract public class Timer
     {
-        protected UnityEvent<Timer> event_handler = new UnityEvent<Timer>();
         protected float elapsed = 0.0f;
         protected float end = 0.0f;
+
+        public event TimeElapsed<Timer> onTimeElapsed;
 
         /**
          * Create and set the timer to go off after seconds.
@@ -50,34 +57,14 @@ namespace PandoraCube.TimeManagment
         abstract public bool Tick();
 
         /**
-         * Subscribe to the timer's end time event.
-         */
-        public void Subscribe(UnityAction<Timer> callback)
-        {
-            event_handler.AddListener(callback);
-        }
-
-        /**
-         * Unsubscribe to the timer's end time event.
-         */
-        public void Unsubscribe(UnityAction<Timer> callback)
-        {
-            event_handler.RemoveListener(callback);
-        }
-
-        /**
          * Notifies all event subscribers.
          * 
          * This event handler should be called in the Tick() method.
-         * All event subscrubers will be removed on the first call.
+         * All event subscribers will be removed on the first call.
          */
-        protected void OnTimeElapsedEventHandler()
+        protected void OnTimeElapsed()
         {
-            if (event_handler != null)
-            {
-                event_handler.Invoke(this);
-                event_handler = null;
-            }
+            onTimeElapsed?.Invoke(this);
         }
     }
 }

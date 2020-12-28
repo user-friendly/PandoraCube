@@ -45,17 +45,18 @@ namespace PandoraCube
                 return;
             }
             GetComponent<Renderer>().material = m_active;
-            TimeManager tm = GameObject.Find("PandoraCube").GetComponent<TimeManager>();
+            TimeManager tm = PandoraCube.instance.GetComponent<TimeManager>();
             if (tm != null)
             {
                 is_active = true;
-                tm.CreateFrameTimer(1.0f, (Timer t) =>
+                Timer t = tm.CreateFrameTimer(1.0f);
+                t.onTimeElapsed += (Timer timer) =>
                 {
                     //Debug.Log("CubeFace: Timer's up: " + t.GetHashCode()
                     //    + "\n\telapsed time (seconds): " + t.Get());
                     GetComponent<Renderer>().material = m_original;
                     is_active = false;
-                });
+                };
             }
         }
 

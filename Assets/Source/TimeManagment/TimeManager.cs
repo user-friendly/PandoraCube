@@ -1,68 +1,87 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace PandoraCube.TimeManagment {
+
+    /**
+     * TODO Need to rethink how timers are stored and ticks are handled,
+     *      in a more uniform manner.
+     */
     public class TimeManager : MonoBehaviour
     {
-        // Frame timers;
-        protected List<FrameTimer> frame_timers = new List<FrameTimer>();
+        // Frame step timers;
+        protected List<Timer> frame_timers = new List<Timer>();
+        // Fixed step timers.
+        protected List<Timer> fixed_timers = new List<Timer>();
 
-        // Fixed Countdown Timer
-        protected List<CountdownTimer> cd_timer = new List<CountdownTimer>();
+        // Cleanup timer lists.
 
-        protected List<Timer> finished_timers = new List<Timer>();
+        protected List<Timer> finished_timers_frame = new List<Timer>();
+        protected List<Timer> finished_timers_fixed = new List<Timer>();
 
         protected void Update()
         {
             // Advance time for all timers.
-            foreach (FrameTimer timer in frame_timers)
+            foreach (Timer timer in frame_timers)
             {
                 if (!timer.Tick())
                 {
-                    finished_timers.Add(timer);
+                    finished_timers_frame.Add(timer);
                 }
-            }
-            // Remove finished timers.
-            if (finished_timers.Count > 0)
-            {
-                foreach (FrameTimer timer in finished_timers)
-                {
-                    frame_timers.Remove(timer);
-                    // Debug.Log("TimeManager: Removed FrameTimer: " + timer.GetHashCode());
-                }
-                finished_timers.Clear();
             }
         }
 
         protected void FixedUpdate()
         {
-            
+            foreach (Timer timer in fixed_timers)
+            {
+                if (!timer.Tick())
+                {
+                    finished_timers_fixed.Add(timer);
+                }
+            }
+        }
+
+        // TODO Is this the method to remove the timers?
+        protected void LateUpdate()
+        {
+            // Remove finished timers.
+            if (finished_timers_frame.Count > 0)
+            {
+                foreach (Timer timer in finished_timers_frame)
+                {
+                    frame_timers.Remove(timer);
+                    // Debug.Log("TimeManager: Removed frame update timer: " + timer.GetHashCode());
+                }
+                finished_timers_frame.Clear();
+            }
+            if (finished_timers_fixed.Count > 0)
+            {
+                foreach (Timer timer in finished_timers_fixed)
+                {
+                    fixed_timers.Remove(timer);
+                    // Debug.Log("TimeManager: Removed fixed update timer: " + timer.GetHashCode());
+                }
+                finished_timers_fixed.Clear();
+            }
         }
 
         /**
-         * Create and subscrube to a FrameTimer.
+         * Create a FrameTimer.
          */
-        public void CreateFrameTimer(float seconds, UnityAction<Timer> callback)
+        public FrameTimer CreateFrameTimer(float seconds)
         {
             FrameTimer timer = new FrameTimer(seconds);
-            timer.Subscribe(callback);
             frame_timers.Add(timer);
-
+            return timer;
             // Debug.Log("TimeManager: New FrameTimer: " + timer.GetHashCode());
         }
 
-        /**
-         * Unsubscribe from all timers.
-         * 
-         * For a large number of timers, this is a very expensive method.
-         */
-        public void UnsubscribeAll(UnityAction<Timer> callback)
+        public CountdownTimer CreateCountdownTimer(float seconds)
         {
-            foreach (FrameTimer timer in frame_timers)
-            {
-                timer.Unsubscribe(callback);
-            }
+            CountdownTimer timer = new CountdownTimer(seconds);
+            fixed_timers.Add(timer);
+            return timer;
         }
     }
 }

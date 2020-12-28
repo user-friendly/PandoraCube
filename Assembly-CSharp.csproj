@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Source\Cube.cs" />
+    <Compile Include="Assets\Source\UI\FullScreenMessage.cs" />
     <Compile Include="Assets\Source\TimeManagment\FixedTimer.cs" />
     <Compile Include="Assets\Source\PandoraCube.cs" />
     <Compile Include="Assets\Source\CubeFaceSet.cs" />
@@ -67,10 +68,9 @@
     <Compile Include="Assets\Source\CubeFaceSequence.cs" />
     <Compile Include="Assets\Source\UI\Sequence.cs" />
     <Compile Include="Assets\Source\TimeManagment\Timer.cs" />
-    <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
-    <Compile Include="Assets\Source\UI\FullScreenMessage.cs" />
-    <Compile Include="Assets\Source\UI\CountdownTimer.cs" />
     <Compile Include="Assets\Source\TimeManagment\CountdownTimer.cs" />
+    <Compile Include="Assets\Source\TimeManagment\FrameTimer.cs" />
+    <Compile Include="Assets\Source\UI\CountdownTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

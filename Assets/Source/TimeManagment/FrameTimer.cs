@@ -21,7 +21,7 @@ namespace PandoraCube.TimeManagment
             }
             else
             {
-                OnTimeElapsedEventHandler();
+                OnTimeElapsed();
             }
             return false;
         }

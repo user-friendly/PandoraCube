@@ -2,6 +2,9 @@
 
 namespace PandoraCube.TimeManagment
 {
+    /**
+     * A countdown timer in fixed delta steps.
+     */
     public class CountdownTimer : Timer
     {
         public CountdownTimer(float seconds)
@@ -24,7 +27,7 @@ namespace PandoraCube.TimeManagment
             }
             else
             {
-                OnTimeElapsedEventHandler();
+                OnTimeElapsed();
             }
             return false;
         }
